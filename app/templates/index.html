@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-2"></div>
+    {% for user in users %}
+    <div class="row align-items-center mb-2">
+        <div class="col-sm-auto pr-0">
+            <img width="30" height="30" src="{{url_for('static', filename='tsbutton.png')}}" />
+        </div>
+        <div class="col-sm pl-3">
+            <h2 class="mb-0" >{{ user }}</h2>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+{% endblock %}
