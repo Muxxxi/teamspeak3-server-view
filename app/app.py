@@ -10,7 +10,6 @@ app = Flask(__name__)
 
 TS_API_KEY = os.getenv('TS_API_KEY')
 TS_API_URL = os.getenv('TS_API_URL')
-ROOT_PATH = os.getenv('ROOT_PATH') or ""
 
 def get_clients():
     session = requests.Session()
@@ -26,6 +25,6 @@ def get_clients():
     return users
 
 
-@app.route(f'/{ROOT_PATH}')
+@app.route('/')
 def index():
     return render_template("index.html", users=get_clients())
