@@ -1,16 +1,29 @@
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block content %}
-<div class="container mt-2"></div>
-    {% for user in users %}
-    <div class="row align-items-center mb-2">
-        <div class="col-sm-auto pr-0">
-            <img width="30" height="30" src="{{url_for('static', filename='tsbutton.png')}}" />
-        </div>
-        <div class="col-sm pl-3">
-            <h2 class="mb-0" >{{ user }}</h2>
-        </div>
-      </div>
-    {% endfor %}
-</div>
-{% endblock %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css" integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('index')}}">
+          <img src="{{url_for('static', path='/ts.png')}}" width="30" height="30" alt="">
+          Max Teamspeak Server
+        </a>
+    </nav>
+    <meta name="pic" content="{{url_for('static', path='/tsbutton.png')}}" />
+    <div id="list" class="mt-2 ml-3"></div>
+    <script src="{{url_for('static', path='/ws.js')}}"></script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
