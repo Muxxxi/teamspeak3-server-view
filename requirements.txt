@@ -1,4 +1,5 @@
 requests
-uvicorn
+uvicorn[standard]
 starlette
 fastapi
+jinja2

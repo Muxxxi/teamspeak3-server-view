@@ -22,7 +22,7 @@ templates = Jinja2Templates(directory=f"{Path(__file__).parent.resolve()}/templa
 
 @app.on_event("startup")
 async def init():
-    asyncio.get_event_loop().create_task(utils.run(utils.fetch_clients_mock))
+    asyncio.get_event_loop().create_task(utils.run(utils.fetch_clients))
 
 
 @app.middleware("http")

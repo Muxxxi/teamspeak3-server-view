@@ -11,9 +11,10 @@ RUN apt-get update && apt-get install -y \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /root/.cache/pip
 
-COPY app/ /app/
+COPY app/ /app/app
+COPY main.py /app
 
 EXPOSE 8080
 
 ENTRYPOINT [ "dumb-init", "--" ]
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+CMD ["python3", "main.py"]
