@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from starlette.websockets import WebSocket
@@ -14,10 +14,14 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(openapi_url="")
 
+dir_path = Path(__file__).parent.resolve()
 
-app.mount("/static", StaticFiles(directory=f"{Path(__file__).parent.resolve()}/static"), name="static")
 
-templates = Jinja2Templates(directory=f"{Path(__file__).parent.resolve()}/templates")
+app.mount("/static", StaticFiles(directory=f"{dir_path}/static"), name="static")
+
+templates = Jinja2Templates(directory=f"{dir_path}/templates")
+favicon_path = f'/{dir_path}/static/favicon.ico'
+
 
 
 @app.on_event("startup")
@@ -57,3 +61,8 @@ async def echo(websocket: WebSocket):
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse(favicon_path)

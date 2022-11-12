@@ -1,4 +1,8 @@
-const socket = new WebSocket('ws://' + location.host + '/ws');
+var wsProtocol = 'ws://';
+if (window.location.protocol === 'https:') {
+    wsProtocol = 'wss://';
+}
+const socket = new WebSocket(wsProtocol + location.host + '/ws');
 socket.addEventListener('message', ev => {
   var users = JSON.parse(ev.data)
   if (users.length > 0){
