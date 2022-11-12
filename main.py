@@ -14,7 +14,7 @@ def main():
         logging.error(f' Please provide TS server api credentials')
         sys.exit(1)
 
-    uvicorn.run(app.app, host="0.0.0.0", port=8080, proxy_headers=True)
+    uvicorn.run(app.app, host="0.0.0.0", port=8080, proxy_headers=True, forwarded_allow_ips="*")
 
 
 if __name__ == "__main__":
