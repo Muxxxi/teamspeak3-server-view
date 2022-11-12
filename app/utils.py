@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import os
 import random
 import string
 from typing import Callable
@@ -8,9 +7,6 @@ from typing import Callable
 import requests
 
 from app import env
-
-TS_API_KEY = os.getenv('TS_API_KEY')
-TS_API_URL = os.getenv('TS_API_URL')
 
 users = []
 
@@ -24,10 +20,10 @@ def get_random_string(length):
 
 def fetch_clients():
     session = requests.Session()
-    session.headers.update({'x-api-key': TS_API_KEY})
-    r = session.get(f'{TS_API_URL}1/clientlist')
+    session.headers.update({'x-api-key': env.TS_API_KEY})
+    r = session.get(f'{env.TS_API_URL}1/clientlist')
     data = r.json()
-    logging.info(f'API OUTPUT: {data}')
+    logging.debug(f'API OUTPUT: {data}')
     new_users = []
     if 'body' in data:
         for user in data['body']:
@@ -43,13 +39,13 @@ def fetch_clients_mock():
 
 
 async def run(func: Callable):
-    logging.info("Start ts server listener...")
+    logging.info(" Start ts server listener...")
     global users
     while True:
         new_users = func()
         if users != new_users:
             users = new_users
-            logging.info(f'set users: {users}')
+            logging.info(f' Set users: {users}')
             for q in env.queues.values():
                 try:
                     q.put_nowait(users)

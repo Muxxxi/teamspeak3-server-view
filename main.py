@@ -1,8 +1,21 @@
 import uvicorn
-from app import app
+from app import app, env
 import logging
+import sys
 
-logging.basicConfig(level=logging.INFO)
+
+def main():
+    level = logging.getLevelName(env.LOG_LEVEL)
+    logging.basicConfig(level=level)
+
+    logging.info(f' Startup TS Server Viewer. Log level: {env.LOG_LEVEL}')
+
+    if (env.TS_API_KEY == "" or env.TS_API_URL == "") and not env.LOG_LEVEL == "DEBUG":
+        logging.error(f' Please provide TS server api credentials')
+        sys.exit(1)
+
+    uvicorn.run(app.app, host="0.0.0.0", port=8080)
+
 
 if __name__ == "__main__":
-    uvicorn.run(app.app, host="0.0.0.0", port=8080)
+    main()
