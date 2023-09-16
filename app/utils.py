@@ -47,14 +47,17 @@ async def run(func: Callable):
     logging.info("Start ts server listener...")
     global users
     while True:
-        new_users = func()
-        logging.info(f"Refresh user list: {new_users}")
-        if users != new_users:
-            users = new_users
-            for q in env.queues.values():
-                try:
-                    q.put_nowait(users)
-                except asyncio.QueueFull as e:
-                    logging.info(e)
-        await asyncio.sleep(int(env.TS_API_INTERVAL))
-
+        try:
+            new_users = func()
+            logging.info(f"Refresh user list: {new_users}")
+            if users != new_users:
+                users = new_users
+                for q in env.queues.values():
+                    try:
+                        q.put_nowait(users)
+                    except asyncio.QueueFull as e:
+                        logging.info(e)
+            await asyncio.sleep(int(env.TS_API_INTERVAL))
+        except Exception as e:
+            logging.error(f'{e}')
+            continue
