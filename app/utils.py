@@ -26,7 +26,7 @@ def get_random_string(length):
 def fetch_clients():
     session = requests.Session()
     session.headers.update({'x-api-key': env.TS_API_KEY})
-    r = session.get(f'{env.TS_API_URL}1/clientlist')
+    r = session.get(f'{env.TS_API_URL}1/clientlist', timeout=5)
     data = r.json()
     logging.debug(f'API OUTPUT: {data}')
     new_users = []
