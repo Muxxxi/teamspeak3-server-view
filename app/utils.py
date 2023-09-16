@@ -56,5 +56,5 @@ async def run(func: Callable):
                     q.put_nowait(users)
                 except asyncio.QueueFull as e:
                     logging.info(e)
-        await asyncio.sleep(10)
+        await asyncio.sleep(5)
 
