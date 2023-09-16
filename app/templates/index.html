@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <title>Max Teamspeak Server</title>
     <link rel="icon" type="image/x-icon" href="{{url_for('static', path='/favicon.ico')}}">
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,16 +11,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css" integrity="sha384-nNK9n28pDUDDgIiIqZ/MiyO3F4/9vsMtReZK39klb/MtkZI3/LtjSjlmyVPS3KdN" crossorigin="anonymous">    <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ url_for('index')}}">
           <img src="{{url_for('static', path='/ts.png')}}" width="30" height="30" alt="">
           Max Teamspeak Server
         </a>
-    </nav>
-    <meta name="pic" content="{{url_for('static', path='/tsbutton.png')}}" />
-    <div id="list" class="mt-2 ml-3"></div>
-    <script src="{{url_for('static', path='/ws.js')}}"></script>
-
+        <span  class="ml-auto mr-3">
+          <h4 id="connectionStatus">Connecting...</h4>
+        </span>
+      </nav>
+      <meta name="pic" content="{{url_for('static', path='/tsbutton.png')}}" />
+      <div id="list" class="mt-2 ml-3"></div>
+      <script src="{{url_for('static', path='/ws.js')}}"></script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

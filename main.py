@@ -10,7 +10,7 @@ def main():
 
     logging.info(f' Startup TS Server Viewer. Log level: {env.LOG_LEVEL}')
 
-    if (env.TS_API_KEY == "" or env.TS_API_URL == "") and not env.LOG_LEVEL == "DEBUG":
+    if (env.TS_API_KEY == "" or env.TS_API_URL == "") and not env.TS_DEBUG_MODE:
         logging.error(f' Please provide TS server api credentials')
         sys.exit(1)
 

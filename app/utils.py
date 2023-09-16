@@ -11,6 +11,11 @@ from app import env
 users = []
 
 
+def get_users():
+    global users
+    return users
+
+
 def get_random_string(length):
     # choose from all lowercase letter
     letters = string.ascii_lowercase
@@ -51,5 +56,5 @@ async def run(func: Callable):
                     q.put_nowait(users)
                 except asyncio.QueueFull as e:
                     logging.info(e)
-        await asyncio.sleep(5)
+        await asyncio.sleep(10)
 
