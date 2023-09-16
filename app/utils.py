@@ -39,22 +39,22 @@ def fetch_clients():
 
 def fetch_clients_mock():
     random_users = [get_random_string(5) for x in range(10)]
-    logging.info(f'List of mock users: {random_users}')
+    logging.debug(f'List of mock users: {random_users}')
     return random_users
 
 
 async def run(func: Callable):
-    logging.info(" Start ts server listener...")
+    logging.info("Start ts server listener...")
     global users
     while True:
         new_users = func()
+        logging.info(f"Refresh user list: {new_users}")
         if users != new_users:
             users = new_users
-            logging.info(f' Set users: {users}')
             for q in env.queues.values():
                 try:
                     q.put_nowait(users)
                 except asyncio.QueueFull as e:
                     logging.info(e)
-        await asyncio.sleep(5)
+        await asyncio.sleep(int(env.TS_API_INTERVAL))
 

@@ -8,7 +8,7 @@ def main():
     level = logging.getLevelName(env.LOG_LEVEL)
     logging.basicConfig(level=level)
 
-    logging.info(f' Startup TS Server Viewer. Log level: {env.LOG_LEVEL}')
+    logging.info(f'Startup TS Server Viewer; Log level: {env.LOG_LEVEL}; Refresh interval: {env.TS_API_INTERVAL}s')
 
     if (env.TS_API_KEY == "" or env.TS_API_URL == "") and not env.TS_DEBUG_MODE:
         logging.error(f' Please provide TS server api credentials')

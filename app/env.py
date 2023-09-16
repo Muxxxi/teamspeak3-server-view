@@ -9,3 +9,4 @@ TS_API_PREFIX = os.getenv('TS_API_PREFIX', '')
 TS_API_KEY = os.getenv('TS_API_KEY', '')
 TS_API_URL = os.getenv('TS_API_URL', '')
 TS_DEBUG_MODE = True if os.getenv('TS_DEBUG_MODE', "false") == "true" else False
+TS_API_INTERVAL = os.getenv('TS_API_INTERVAL', '5')
