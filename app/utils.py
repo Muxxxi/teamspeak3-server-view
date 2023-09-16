@@ -60,4 +60,5 @@ async def run(func: Callable):
             await asyncio.sleep(int(env.TS_API_INTERVAL))
         except Exception as e:
             logging.error(f'{e}')
+            await asyncio.sleep(int(env.TS_API_INTERVAL))
             continue
